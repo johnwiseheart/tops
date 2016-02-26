@@ -4,13 +4,38 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Foundation | Welcome</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/foundation.css')}}" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/foundation.min.css')}}" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/tops.css')}}" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/selectize.css')}}" />
     <script src="{{ url_for('static', filename='js/vendor/modernizr.js')}}"></script>
   </head>
   <body>
-    Memes
+      <div class="small-12 columns panel header">
+        Memes
+      </div>
+    <div class="row">
+      <div class="small-8 columns small-offset-2">
+        <select id="select" placeholder="Who is tops...?"></select>
+      </div>
+    </div>
     <!-- <div class="row">
-      <div class="large-12 columns">
+      <div class="large-8 medium-8 columns">
+        <h5>Here&rsquo;s your basic grid:</h5>
+
+        <div class="row">
+          <div class="large-12 columns">
+            <div class="callout panel">
+              <p><strong>This is a twelve column section in a row.</strong> Each of these includes a div.panel element so you can see where the columns are - it's not required at all for the grid.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+
+    <div class="row">
+      <div class="large-4">
         <h1>Welcome to Foundation</h1>
       </div>
     </div>
@@ -47,9 +72,8 @@
     <div class="row">
       <div class="large-8 medium-8 columns">
         <h5>Here&rsquo;s your basic grid:</h5>
-        <!-- Grid Example -->
 
-        <!-- <div class="row">
+        <div class="row">
           <div class="large-12 columns">
             <div class="callout panel">
               <p><strong>This is a twelve column section in a row.</strong> Each of these includes a div.panel element so you can see where the columns are - it's not required at all for the grid.</p>
@@ -167,9 +191,90 @@
 
     <script src="{{ url_for('static', filename='js/vendor/jquery.js')}}"></script>
     <script src="{{ url_for('static', filename='js/foundation.min.js')}}"></script>
+    <script src="{{ url_for('static', filename='js/selectize.min.js')}}"></script>
     <script src="{{ url_for('static', filename='js/tops.js')}}"></script>
     <script>
+      function formatPerson (person) {
+        if (!person.id) { return person.text; }
+        var $person = $(
+          '<span class="select2_result"><img src="' + person.avatar + '"/> ' + person.text + '</span>'
+        );
+        return $person;
+      };
+
       $(document).foundation();
+      $(document).ready(function() {
+
+        $('#select').selectize({
+            valueField: 'id',
+            labelField: 'name',
+            searchField: 'name',
+            sortField: 'name',
+            create: false,
+            render: {
+                option: function(item, escape) {
+                  console.log(item);
+                    return '<div class="select_result">' +
+                            '<img src="' + item.avatar_url + '"/>' +
+                            '<span class="name">' + escape(item.name) + '</span>' +
+                    '</div>';
+                    return item;
+                }
+            },
+            load: function(query, callback) {
+                if (!query.length) return callback();
+                $.ajax({
+                    url: 'http://localhost:5000/users/',
+                    type: 'GET',
+                    data: {
+                      q: query
+                    },
+                    error: function() {
+                        callback();
+                    },
+                    success: function(res) {
+                        callback(res.data);
+                    }
+                });
+            }
+        }).on('change', function(e) {
+          console.log(e);
+        });        // $.ajax({
+        //   type: 'GET',
+        //   url: 'http://localhost:5000/users/40590',
+        //   success: function(data) {
+        //     alert(data);
+        //   }
+        // // });
+        // $(".select2").select2({
+        //   ajax: {
+        //     url: "http://localhost:5000/users/",
+        //     dataType: 'json',
+        //     delay: 250,
+        //     data: function (params) {
+        //       return {
+        //         q: params.term // search term
+        //       };
+        //     },
+        //     processResults: function (data, params) {
+        //       return {
+        //         results: $.map(data.hits.hits, function (item) {
+        //             return {
+        //               text: item._source.first_name + ' ' + item._source.last_name,
+        //               avatar: item._source.avatar_url,
+        //               id: parseInt(item._id)
+        //             }
+        //         })
+        //       };
+        //     },
+        //     cache: true
+        //   },
+        //   minimumInputLength: 2,
+        //   templateResult: formatPerson,
+        //   theme: 'foundation',
+        //   placeholder: 'Select a user...'
+        // });
+      });
     </script>
   </body>
 </html>

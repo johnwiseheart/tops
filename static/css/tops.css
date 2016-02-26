@@ -1,0 +1,33 @@
+@import url(https://fonts.googleapis.com/css?family=Open+Sans);
+
+html, body {
+  font-family: 'Open Sans', sans-serif;
+}
+
+.header {
+  height: 30vh;
+}
+
+.select_result img {
+  height: 40px;
+  width: 40px;
+}
+
+.select_result span.name {
+  padding: 10px;
+}
+.selectize-input {
+  line-height: 70px!important;
+  font-size: 50px!important;
+}
+
+.selectize-input input {
+  height: 100%;
+}
+
+select {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    text-indent: 1px;
+    text-overflow: '';
+}
