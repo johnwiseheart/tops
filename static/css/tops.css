@@ -17,8 +17,6 @@ html, body {
   transition: all 1s ease;
 }
 
-
-
 .meta {
   -webkit-transition: all 0.5s ease;
   -moz-transition: all 0.5s ease;
@@ -34,6 +32,22 @@ html, body {
 
 .thumbnail {
   border: 1px #eee;
+}
+
+.th img {
+  width: 150px;
+}
+
+.media-object {
+  display: flex;
+}
+
+.media-object-section {
+}
+
+.media-object-section.media-details {
+  padding-left: 20px;
+  flex: 1;
 }
 
 

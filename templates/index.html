@@ -1,139 +1,25 @@
-<!doctype html>
-<html class="no-js" lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="google-signin-client_id" content="655313797231-mvdlqdf1bp7dei19o4s4f23cli2efv5h.apps.googleusercontent.com">
-    <title>Thats Tops!</title>
-    <script src="https://apis.google.com/js/platform.js" async defer></script>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/foundation.min.css')}}" />
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/tops.css')}}" />
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/selectize.css')}}" />
-    <script src="{{ url_for('static', filename='js/vendor/modernizr.js')}}"></script>
-  </head>
-  <body>
-    <div class="small-12 columns panel header">
-      <img src="{{ url_for('static', filename='img/tops3.png') }}" /><br/>
-    </div>
-
-    <div class="row logged-out">
-      <div class="small-6 columns small-offset-3 panel text-center">
-        To use tops, you must sign in with google.
-        <div class="g-signin2" data-onsuccess="onSignIn"></div>
-      </div>
-    </div>
-
-    <div class="row logged-in">
-      <div class="small-10 columns small-offset-1 panel meta">
-        <select id="select" placeholder="Who is tops?"></select>
-        <div class="info">
-            <div class="details">
-              <div class="details_image">
-                <img class="thumbnail" src="" />
-              </div>
-              <div class="details_text">
-                <textarea id="tops_text"> </textarea>
-              </div>
-              <a class="tops_button button" href="#">
-                <img class="thumbs" src="{{ url_for('static', filename='img/thumbs-up-transparent.svg') }}" />
-              </a>
+{% extends "base.html" %}
+{% block content %}
+<div class="row">
+  <div class="small-10 columns small-offset-1 panel meta">
+    <select id="select" placeholder="Who is tops?"></select>
+    <div class="info">
+        <div class="details">
+          <div class="details_image">
+            <img class="thumbnail" src="" />
           </div>
-        </div>
+          <div class="details_text">
+            <textarea id="tops_text"> </textarea>
+          </div>
+          <a class="tops_button button" href="#">
+            <img class="thumbs" src="{{ url_for('static', filename='img/thumbs-up-transparent.svg') }}" />
+          </a>
       </div>
     </div>
+  </div>
+</div>
+{% endblock %}
 
-
-    <script src="{{ url_for('static', filename='js/vendor/jquery.js')}}"></script>
-    <script src="{{ url_for('static', filename='js/foundation.min.js')}}"></script>
-    <script src="{{ url_for('static', filename='js/selectize.min.js')}}"></script>
-    <script src="{{ url_for('static', filename='js/tops.js')}}"></script>
-    <script>
-      $(document).foundation();
-      var googleName;
-      function onSignIn(googleUser) {
-        var profile = googleUser.getBasicProfile();
-        console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
-        googleName = profile.getName();
-        console.log('Name: ' + profile.getName());
-        console.log('Image URL: ' + profile.getImageUrl());
-        console.log('Email: ' + profile.getEmail());
-        $('.logged-out').hide();
-        $('.logged-in').show();
-      }
-
-
-      $(document).ready(function() {
-        $('#select').selectize({
-            valueField: 'id',
-            labelField: 'name',
-            searchField: 'name',
-            create: false,
-            render: {
-                option: function(item, escape) {
-                    return '<div class="select_result">' +
-                            '<img src="' + item.avatar_url + '"/>' +
-                            '<span class="name">' + escape(item.name) + '</span>' +
-                    '</div>';
-                    return item;
-                }
-            },
-            load: function(query, callback) {
-                if (!query.length) return callback();
-                $.ajax({
-                    url: 'http://localhost:5000/users/',
-                    type: 'GET',
-                    data: {
-                      q: query
-                    },
-                    error: function() {
-                        callback();
-                    },
-                    success: function(res) {
-                        callback(res.data);
-                    }
-                });
-            },
-            onChange: function(value) {
-              console.log("memes")
-              $.ajax({
-                  url: 'http://localhost:5000/users/' + value ,
-                  type: 'GET',
-                  success: function(res) {
-                      console.log(res)
-                      if (res.users) {
-                        $('.header').css('height', '20vh');
-                        var image = $('.details img.thumbnail').attr('src', res.users[0].avatar_urls.xlarge);
-                        $('.details_text textarea').val(res.users[0].first_name + ' is tops because...')
-                        image.on('load', function() {
-                          $('.details').css('height', 'auto').css('opacity', 100);
-                        })
-                      }
-                      console.log(res);
-                      $('.tops_button').click(function(e) {
-                        $.ajax({
-                            url: 'http://localhost:5000/topsevents/',
-                            type: 'POST',
-                            dataType: 'json',
-                            contentType: "application/json",
-                            data: JSON.stringify({
-                              to_user_name: res.users[0].first_name + ' ' + res.users[0].last_name,
-                              from_user_name: googleName,
-                              reason: $('#tops_text').val()
-                            }),
-                            success: function(res) {
-                                console.log(res);
-                                if (res.success) {
-                                  $('.meta').html("Thanks for submitting a tops!")
-                                }
-                            }
-                        });
-                      });
-                  }
-              });
-            }
-        });
-
-      });
-    </script>
-  </body>
-</html>
+{% block js %}
+    <script src="{{ url_for('static', filename='js/tops_index.js')}}"></script>
+{% endblock %}
