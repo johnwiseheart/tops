@@ -43,6 +43,9 @@ class User(db.Model):
     tops = db.Column(db.Integer)
     total_tops = db.Column(db.Integer)
 
+    def to_dict(self):
+       return {c.name: getattr(self, c.name) for c in self.__table__.columns}
+
 class TopsEvent(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     reason = db.Column(db.String(256))
@@ -70,7 +73,8 @@ class RedeemEvent(db.Model):
         return '<RedeemableEvent user:%r redeemable_id:%r>' % (self.user_id, self.redeemable_id)
 
     def to_dict(self):
-       return {c.name: getattr(self, c.name) for c in self.__table__.columns}
+       return dict({c.name: getattr(self, c.name) for c in self.__table__.columns}.items() + {'user': self.user.to_dict()}.items() + {'redeemable': self.redeemable.to_dict()}.items())
+
 
 class Redeemable(db.Model):
     id = db.Column(db.Integer, primary_key=True)

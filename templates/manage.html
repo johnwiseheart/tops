@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="row">
+  <dl id="filter" class="sub-nav">
+    <dt>Filter:</dt>
+    <dd name="tops" class="active"><a href="#">Tops Events</a></dd>
+    <dd name="redeem"><a href="#">Redeem Events</a></dd>
+  </dl>
+</div>
+
+<div class="row">
+  <table id="events">
+  </table>
+</div>
+{% endblock %}
+
+{% block js %}
+    <script src="{{ url_for('static', filename='js/tops_manage.js')}}"></script>
+{% endblock %}
