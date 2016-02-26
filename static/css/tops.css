@@ -2,10 +2,50 @@
 
 html, body {
   font-family: 'Open Sans', sans-serif;
+  background-color: #eee;
 }
 
 .header {
-  height: 30vh;
+  height: 40vh;
+  min-height: 100px;
+  background-image: url('/static/img/background.png');
+  background-size: cover;
+  text-align: center;
+  -webkit-transition: all 1s ease;
+  -moz-transition: all 1s ease;
+  -o-transition: all 1s ease;
+  transition: all 1s ease;
+}
+
+
+
+.meta {
+  -webkit-transition: all 0.5s ease;
+  -moz-transition: all 0.5s ease;
+  -o-transition: all 0.5s ease;
+  transition: all 0.5s ease;
+  background: #fff;
+}
+
+.details {
+  height: 0;
+  opacity: 0;
+}
+
+.thumbnail {
+  border: 1px #eee;
+}
+
+*:focus {
+outline: none;
+}
+
+.thumbs {
+  height: 120px;
+}
+
+.header img {
+  height: 100%;
 }
 
 .select_result img {
@@ -19,10 +59,33 @@ html, body {
 .selectize-input {
   line-height: 70px!important;
   font-size: 50px!important;
+  text-align: center;
 }
 
 .selectize-input input {
   height: 100%;
+  text-align: center;
+}
+
+
+::-webkit-input-placeholder {
+  text-align: center!important;
+  font-size: 20px!important;
+}
+
+:-moz-placeholder { /* Firefox 18- */
+  text-align: center!important;
+  font-size: 20px!important;
+}
+
+::-moz-placeholder {  /* Firefox 19+ */
+  text-align: center!important;
+  font-size: 20px!important;
+}
+
+:-ms-input-placeholder {
+  text-align: center!important;
+  font-size: 20px!important;
 }
 
 select {
@@ -30,4 +93,53 @@ select {
     -moz-appearance: none;
     text-indent: 1px;
     text-overflow: '';
+}
+
+.panel {
+  background-color: #fff;
+}
+
+.details {
+  display: flex;
+
+}
+
+.logged-in {
+  display:none;
+}
+
+.g-signin2 {
+  padding-top: 20px;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  margin: 0 auto;
+}
+
+.logged-out {
+
+}
+
+.details_image {
+  flex: 2;
+  flex-direction:column;
+}
+
+.details_text {
+  margin: 0 10px;
+  flex: 6;
+  display: flex;
+  flex-direction:column;
+}
+
+.details textarea {
+  flex: 1;
+  flex-grow: 1;
+  margin-bottom: 0;
+}
+
+.details .button {
+  flex: 1;
+  margin-bottom: 0;
+  background-color: #1c6f79;
 }

@@ -3,217 +3,71 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="google-signin-client_id" content="655313797231-mvdlqdf1bp7dei19o4s4f23cli2efv5h.apps.googleusercontent.com">
     <title>Foundation | Welcome</title>
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/foundation.min.css')}}" />
     <link rel="stylesheet" href="{{ url_for('static', filename='css/tops.css')}}" />
     <link rel="stylesheet" href="{{ url_for('static', filename='css/selectize.css')}}" />
     <script src="{{ url_for('static', filename='js/vendor/modernizr.js')}}"></script>
   </head>
   <body>
-      <div class="small-12 columns panel header">
-        Memes
-      </div>
-    <div class="row">
-      <div class="small-8 columns small-offset-2">
-        <select id="select" placeholder="Who is tops...?"></select>
-      </div>
+    <div class="small-12 columns panel header">
+      <img src="{{ url_for('static', filename='img/tops3.png') }}" /><br/>
     </div>
-    <!-- <div class="row">
-      <div class="large-8 medium-8 columns">
-        <h5>Here&rsquo;s your basic grid:</h5>
 
-        <div class="row">
-          <div class="large-12 columns">
-            <div class="callout panel">
-              <p><strong>This is a twelve column section in a row.</strong> Each of these includes a div.panel element so you can see where the columns are - it's not required at all for the grid.</p>
-            </div>
-          </div>
-        </div>
+    <div class="row logged-out">
+      <div class="small-6 columns small-offset-3 panel text-center">
+        To use tops, you must sign in with google.
+        <div class="g-signin2" data-onsuccess="onSignIn"></div>
       </div>
     </div>
 
-
-
-    <div class="row">
-      <div class="large-4">
-        <h1>Welcome to Foundation</h1>
-      </div>
-    </div>
-
-    <div class="row">
-      <div class="large-12 columns">
-        <div class="panel">
-          <h3>We&rsquo;re stoked you want to try Foundation! </h3>
-          <p>To get going, this file (index.html) includes some basic styles you can modify, play around with, or totally destroy to get going.</p>
-          <p>Once you've exhausted the fun in this document, you should check out:</p>
-          <div class="row">
-            <div class="large-4 medium-4 columns">
-              <p><a href="http://foundation.zurb.com/docs">Foundation Documentation</a><br />Everything you need to know about using the framework.</p>
-            </div>
-            <div class="large-4 medium-4 columns">
-              <p><a href="http://zurb.com/university/code-skills">Foundation Code Skills</a><br />These online courses offer you a chance to better understand how Foundation works and how you can master it to create awesome projects.</p>
-            </div>
-            <div class="large-4 medium-4 columns">
-              <p><a href="http://foundation.zurb.com/forum">Foundation Forum</a><br />Join the Foundation community to ask a question or show off your knowlege.</p>
-            </div>
-          </div>
-          <div class="row">
-            <div class="large-4 medium-4 medium-push-2 columns">
-              <p><a href="http://github.com/zurb/foundation">Foundation on Github</a><br />Latest code, issue reports, feature requests and more.</p>
-            </div>
-            <div class="large-4 medium-4 medium-pull-2 columns">
-              <p><a href="https://twitter.com/ZURBfoundation">@zurbfoundation</a><br />Ping us on Twitter if you have questions. When you build something with this we'd love to see it (and send you a totally boss sticker).</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="row">
-      <div class="large-8 medium-8 columns">
-        <h5>Here&rsquo;s your basic grid:</h5>
-
-        <div class="row">
-          <div class="large-12 columns">
-            <div class="callout panel">
-              <p><strong>This is a twelve column section in a row.</strong> Each of these includes a div.panel element so you can see where the columns are - it's not required at all for the grid.</p>
-            </div>
-          </div>
-        </div>
-        <div class="row">
-          <div class="large-6 medium-6 columns">
-            <div class="callout panel">
-              <p>Six columns</p>
-            </div>
-          </div>
-          <div class="large-6 medium-6 columns">
-            <div class="callout panel">
-              <p>Six columns</p>
-            </div>
-          </div>
-        </div>
-        <div class="row">
-          <div class="large-4 medium-4 small-4 columns">
-            <div class="callout panel">
-              <p>Four columns</p>
-            </div>
-          </div>
-          <div class="large-4 medium-4 small-4 columns">
-            <div class="callout panel">
-              <p>Four columns</p>
-            </div>
-          </div>
-          <div class="large-4 medium-4 small-4 columns">
-            <div class="callout panel">
-              <p>Four columns</p>
-            </div>
-          </div>
-        </div>
-
-        <hr />
-
-        <h5>We bet you&rsquo;ll need a form somewhere:</h5>
-        <form>
-          <div class="row">
-            <div class="large-12 columns">
-              <label>Input Label</label>
-              <input type="text" placeholder="large-12.columns" />
-            </div>
-          </div>
-          <div class="row">
-            <div class="large-4 medium-4 columns">
-              <label>Input Label</label>
-              <input type="text" placeholder="large-4.columns" />
-            </div>
-            <div class="large-4 medium-4 columns">
-              <label>Input Label</label>
-              <input type="text" placeholder="large-4.columns" />
-            </div>
-            <div class="large-4 medium-4 columns">
-              <div class="row collapse">
-                <label>Input Label</label>
-                <div class="small-9 columns">
-                  <input type="text" placeholder="small-9.columns" />
-                </div>
-                <div class="small-3 columns">
-                  <span class="postfix">.com</span>
-                </div>
+    <div class="row logged-in">
+      <div class="small-10 columns small-offset-1 panel meta">
+        <select id="select" placeholder="Who is tops?"></select>
+        <div class="info">
+            <div class="details">
+              <div class="details_image">
+                <img class="thumbnail" src="" />
               </div>
-            </div>
+              <div class="details_text">
+                <textarea id="tops_text"> </textarea>
+              </div>
+              <a class="tops_button button" href="#">
+                <img class="thumbs" src="{{ url_for('static', filename='img/thumbs-up-transparent.svg') }}" />
+              </a>
           </div>
-          <div class="row">
-            <div class="large-12 columns">
-              <label>Select Box</label>
-              <select>
-                <option value="husker">Husker</option>
-                <option value="starbuck">Starbuck</option>
-                <option value="hotdog">Hot Dog</option>
-                <option value="apollo">Apollo</option>
-              </select>
-            </div>
-          </div>
-          <div class="row">
-            <div class="large-6 medium-6 columns">
-              <label>Choose Your Favorite</label>
-              <input type="radio" name="pokemon" value="Red" id="pokemonRed"><label for="pokemonRed">Radio 1</label>
-              <input type="radio" name="pokemon" value="Blue" id="pokemonBlue"><label for="pokemonBlue">Radio 2</label>
-            </div>
-            <div class="large-6 medium-6 columns">
-              <label>Check these out</label>
-              <input id="checkbox1" type="checkbox"><label for="checkbox1">Checkbox 1</label>
-              <input id="checkbox2" type="checkbox"><label for="checkbox2">Checkbox 2</label>
-            </div>
-          </div>
-          <div class="row">
-            <div class="large-12 columns">
-              <label>Textarea Label</label>
-              <textarea placeholder="small-12.columns"></textarea>
-            </div>
-          </div>
-        </form>
-      </div>
-
-      <div class="large-4 medium-4 columns">
-        <h5>Try one of these buttons:</h5>
-        <p><a href="#" class="small button">Simple Button</a><br/>
-        <a href="#" class="small radius button">Radius Button</a><br/>
-        <a href="#" class="small round button">Round Button</a><br/>
-        <a href="#" class="medium success button">Success Btn</a><br/>
-        <a href="#" class="medium alert button">Alert Btn</a><br/>
-        <a href="#" class="medium secondary button">Secondary Btn</a></p>
-        <div class="panel">
-          <h5>So many components, girl!</h5>
-          <p>A whole kitchen sink of goodies comes with Foundation. Check out the docs to see them all, along with details on making them your own.</p>
-          <a href="http://foundation.zurb.com/docs/" class="small button">Go to Foundation Docs</a>
         </div>
       </div>
-    </div> -->
+    </div>
+
 
     <script src="{{ url_for('static', filename='js/vendor/jquery.js')}}"></script>
     <script src="{{ url_for('static', filename='js/foundation.min.js')}}"></script>
     <script src="{{ url_for('static', filename='js/selectize.min.js')}}"></script>
     <script src="{{ url_for('static', filename='js/tops.js')}}"></script>
     <script>
-      function formatPerson (person) {
-        if (!person.id) { return person.text; }
-        var $person = $(
-          '<span class="select2_result"><img src="' + person.avatar + '"/> ' + person.text + '</span>'
-        );
-        return $person;
-      };
-
       $(document).foundation();
-      $(document).ready(function() {
+      function onSignIn(googleUser) {
+        var profile = googleUser.getBasicProfile();
+        console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
+        console.log('Name: ' + profile.getName());
+        console.log('Image URL: ' + profile.getImageUrl());
+        console.log('Email: ' + profile.getEmail());
+        $('.logged-out').hide();
+        $('.logged-in').show();
+      }
 
+
+      $(document).ready(function() {
         $('#select').selectize({
             valueField: 'id',
             labelField: 'name',
             searchField: 'name',
-            sortField: 'name',
             create: false,
             render: {
                 option: function(item, escape) {
-                  console.log(item);
                     return '<div class="select_result">' +
                             '<img src="' + item.avatar_url + '"/>' +
                             '<span class="name">' + escape(item.name) + '</span>' +
@@ -236,44 +90,47 @@
                         callback(res.data);
                     }
                 });
+            },
+            onChange: function(value) {
+              $('.loading').show();
+              $('.details').css('height', 0).css('opacity', 0);
+              $.ajax({
+                  url: 'http://localhost:5000/users/' + value ,
+                  type: 'GET',
+                  success: function(res) {
+                      if (res.users) {
+                        $('.header').css('height', '20vh');
+                        var image = $('.details img.thumbnail').attr('src', res.users[0].avatar_urls.xlarge);
+                        $('.details_text textarea').val(res.users[0].first_name + ' is tops because...')
+                        image.on('load', function() {
+                          $('.details').css('height', 'auto').css('opacity', 100);
+                        })
+                      }
+                      console.log(res);
+                      $('.tops_button').click(function(e) {
+                        $.ajax({
+                            url: 'http://localhost:5000/topsevents/',
+                            type: 'POST',
+                            dataType: 'json',
+                            contentType: "application/json",
+                            data: JSON.stringify({
+                              to_user_id: value,
+                              from_user_id: 1,
+                              reason: $('#tops_text').val()
+                            }),
+                            success: function(res) {
+                                console.log(res);
+                                if (res.success) {
+                                  $('.meta').html("Thanks for submitting a tops!")
+                                }
+                            }
+                        });
+                      });
+                  }
+              });
             }
-        }).on('change', function(e) {
-          console.log(e);
-        });        // $.ajax({
-        //   type: 'GET',
-        //   url: 'http://localhost:5000/users/40590',
-        //   success: function(data) {
-        //     alert(data);
-        //   }
-        // // });
-        // $(".select2").select2({
-        //   ajax: {
-        //     url: "http://localhost:5000/users/",
-        //     dataType: 'json',
-        //     delay: 250,
-        //     data: function (params) {
-        //       return {
-        //         q: params.term // search term
-        //       };
-        //     },
-        //     processResults: function (data, params) {
-        //       return {
-        //         results: $.map(data.hits.hits, function (item) {
-        //             return {
-        //               text: item._source.first_name + ' ' + item._source.last_name,
-        //               avatar: item._source.avatar_url,
-        //               id: parseInt(item._id)
-        //             }
-        //         })
-        //       };
-        //     },
-        //     cache: true
-        //   },
-        //   minimumInputLength: 2,
-        //   templateResult: formatPerson,
-        //   theme: 'foundation',
-        //   placeholder: 'Select a user...'
-        // });
+        });
+
       });
     </script>
   </body>

@@ -98,15 +98,14 @@ class UsersView(FlaskView):
         response = requests.request("GET", url, headers=headers, params=querystring)
 
         result = []
-        print response
         for x in response.json()['hits']['hits']:
             print x
             result.append({
+                "score": x['_score'],
                 "name": x['_source']['first_name'] + ' ' + x['_source']['last_name'],
                 "avatar_url": x['_source']['avatar_url'],
                 "id": int(x['_id'])
             })
-        print result
         # result = []
         # for i in loaded_result[:10]:
         #     result[i] = json
@@ -183,6 +182,7 @@ class TopsEventsView(FlaskView):
         return jsonify(event.to_dict())
 
     def post(self):
+        print request.json
         event = TopsEvent(
             reason=request.json['reason'],
             to_user_id=request.json['to_user_id'],
