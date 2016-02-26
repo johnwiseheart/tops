@@ -181,6 +181,10 @@ def points(email):
         abort(404)
     return jsonify(tops=user.tops, total_tops=user.total_tops)
 
+@app.route('/manage')
+def manage():
+    return render_template('manage.html')
+
 # API
 class UsersView(FlaskView):
     def index(self):
