@@ -1,4 +1,14 @@
 $(document).foundation();
+
+$(window).scroll(function() {
+if ($(this).scrollTop() > 1){
+    $('.header').addClass("tiny");
+  }
+  else{
+    $('.header').removeClass("tiny");
+  }
+});
+
 $(document).ready(function() {
   $('#select').selectize({
       valueField: 'id',

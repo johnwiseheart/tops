@@ -18,7 +18,15 @@
       </div>
     {% block content %}
     {% endblock %}
-
+    <div class="row">
+      <div class="small-12 text-center footer">
+      {% if request.endpoint != 'redeem' %}
+          <a href="{{ url_for('redeem') }}">redeem your tops points</a>
+      {% else %}
+          <a href="{{ url_for('index') }}">give tops</a>
+      {% endif %}
+      </div>
+    </div>
     <script src="{{ url_for('static', filename='js/vendor/jquery.js')}}"></script>
     <script src="{{ url_for('static', filename='js/foundation.min.js')}}"></script>
     <script src="{{ url_for('static', filename='js/selectize.min.js')}}"></script>

@@ -6,15 +6,26 @@ html, body {
 }
 
 .header {
+  position: fixed;
   height: 40vh;
+  z-index: 999;
+  top:0;
   min-height: 100px;
   background-image: url('/static/img/background.png');
   background-size: cover;
   text-align: center;
-  -webkit-transition: all 1s ease;
-  -moz-transition: all 1s ease;
-  -o-transition: all 1s ease;
-  transition: all 1s ease;
+  -webkit-transition: all 0.5s ease;
+  -moz-transition: all 0.5s ease;
+  -o-transition: all 0.5s ease;
+  transition: all 0.5s ease;
+}
+
+.header.tiny {
+  height: 120px;
+}
+
+.header + div {
+  margin-top: 45vh;
 }
 
 .meta {
@@ -183,4 +194,9 @@ select {
   flex: 1;
   margin-bottom: 0;
   background-color: #1c6f79;
+}
+
+.footer a, .footer a:hover, .footer a:active {
+  font-size: 12px;
+  color: #777;
 }
