@@ -45,16 +45,39 @@ html, body {
 .media-object-section {
 }
 
+.white {
+  color: #fff!important;
+}
+
 .little_thumb {
-  height: 30px;
+  height: 25px;
   margin-top: -4px;
   margin-right: -4px;
 }
 
+.redeem-button, .redeem-button:hover, .redeem-button:active {
+  background-color: #1c6f79;
+  margin-bottom: 0;
+  flex: 1;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+}
+
+.tops-points {
+  color: #777;
+  padding-bottom: 20px;
+}
+
+span.huge {
+  font-size: 4em;
+  font-weight: bold;
+  padding: 0;
+}
 
 .media-object-section.media-details {
   padding-left: 20px;
-  flex: 1;
+  flex: 6;
 }
 
 

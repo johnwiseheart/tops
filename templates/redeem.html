@@ -2,10 +2,14 @@
 
 {% block content %}
 <div class="row">
+  <div class="small-12 columns text-center tops-points ">
+  You have<br />
+  <span class="huge">{{ points }}</span><br />
+  tops points available to spend.
+  </div>
+</div>
+<div class="row">
   <div class="small-10 columns small-offset-1 panel">
-    You have {{ points }} tops points available to spend.
-
-    <hr />
     {% for redeemable in redeemables %}
     <div class="media-object">
         <div class="media-object-section">
@@ -17,14 +21,19 @@
           <h4>{{ redeemable.name }}</h4>
           <p>{{ redeemable.description }}</p>
         </div>
-        <div class="media-object-section media-buy">
-          <h3>
-            <img class="little_thumb" src="{{ url_for('static', filename='img/thumbs-up-transparent-dark.svg') }}" />
+        <a href="#" data-redeemable="{{redeemable.id}}" class="redeem-button button">
+          <div>
+          <h3 class="white">
+            <img class="little_thumb" src="{{ url_for('static', filename='img/thumbs-up-transparent.svg') }}" />
             {{ redeemable.value }}
           </h3>
-          <a href="#" data-redeemable="{{redeemable.id}}" class="button tiny redeem-button">Redeem</a>
+          Redeem
         </div>
+        </a>
       </div>
+      {% if not loop.last %}
+      <hr />
+      {% endif %}
   <!-- </div>
     <div>
       <img src="{{ redeemable.image }}" />

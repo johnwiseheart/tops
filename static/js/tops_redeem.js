@@ -4,7 +4,10 @@ $(document).ready(function() {
 });
 
 $('.redeem-button').click(function(e) {
+  if (e.target !== this)
+    e.target = this;
   console.log(e);
+   e.preventDefault();
   console.log($(e.target).data('redeemable'));
   $.ajax({
     url: 'http://localhost:5000/redeemevents/',
@@ -16,6 +19,9 @@ $('.redeem-button').click(function(e) {
     }),
     success: function(res) {
         console.log(res);
+        if (res.success) {
+          window.location.reload();
+        }
     }
   });
 });
