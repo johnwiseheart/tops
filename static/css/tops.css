@@ -45,6 +45,13 @@ html, body {
 .media-object-section {
 }
 
+.little_thumb {
+  height: 30px;
+  margin-top: -4px;
+  margin-right: -4px;
+}
+
+
 .media-object-section.media-details {
   padding-left: 20px;
   flex: 1;

@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="row">
+  <div class="small-10 columns small-offset-1 panel">
+    You have {{ points }} tops points available to spend.
+
+    <hr />
+    {% for redeemable in redeemables %}
+    <div class="media-object">
+        <div class="media-object-section">
+          <div class="th">
+            <img src= "{{ redeemable.image }}">
+          </div>
+        </div>
+        <div class="media-object-section media-details">
+          <h4>{{ redeemable.name }}</h4>
+          <p>{{ redeemable.description }}</p>
+        </div>
+        <div class="media-object-section media-buy">
+          <h3>
+            <img class="little_thumb" src="{{ url_for('static', filename='img/thumbs-up-transparent-dark.svg') }}" />
+            {{ redeemable.value }}
+          </h3>
+          <a href="#" data-redeemable="{{redeemable.id}}" class="button tiny redeem-button">Redeem</a>
+        </div>
+      </div>
+  <!-- </div>
+    <div>
+      <img src="{{ redeemable.image }}" />
+      {{redeemable.name}} {{redeemable.description}} -->
+    {% endfor %}
+  </div>
+</div>
+
+
+{% endblock %}
+
+{% block js %}
+    <script src="{{ url_for('static', filename='js/tops_redeem.js')}}"></script>
+{% endblock %}
