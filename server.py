@@ -33,8 +33,8 @@ class TopsEvent(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     reason = db.Column(db.String(256))
     approved = db.Column(db.Boolean, default=True)
-    to_user_id = db.Column(db.Integer)
-    from_user_id = db.Column(db.Integer)
+    to_user_name = db.Column(db.String)
+    from_user_name = db.Column(db.String)
     datetime = db.Column(db.DateTime, default=datetime.now())
 
     def __repr__(self):
@@ -45,14 +45,14 @@ class TopsEvent(db.Model):
 
 class RedeemEvent(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    user_id = db.Column(db.Integer)
+    user_name = db.Column(db.String)
     redeemable_id = db.Column(db.Integer, db.ForeignKey('redeemable.id'))
     redeemable = db.relationship("Redeemable", backref="redeem_events")
     datetime = db.Column(db.DateTime, default=datetime.now())
     approved = db.Column(db.Boolean, default=False)
 
     def __repr__(self):
-        return '<RedeemableEvent user:%r redeemable_id:%r>' % (self.user_id, self.redeemable_id)
+        return '<RedeemableEvent user:%r redeemable_id:%r>' % (self.user_name, self.redeemable_id)
 
     def to_dict(self):
        return {c.name: getattr(self, c.name) for c in self.__table__.columns}
@@ -160,7 +160,7 @@ class RedeemEventsView(FlaskView):
         if not redeemable:
             abort(404)
         event = RedeemEvent(
-            user_id=request.json['user_id'],
+            user_name=request.json['user_name'],
             redeemable=redeemable,
         )
         db.session.add(event)
@@ -185,8 +185,8 @@ class TopsEventsView(FlaskView):
         print request.json
         event = TopsEvent(
             reason=request.json['reason'],
-            to_user_id=request.json['to_user_id'],
-            from_user_id=request.json['from_user_id'],
+            to_user_name=request.json['to_user_name'],
+            from_user_name=request.json['from_user_name'],
         )
         db.session.add(event)
         db.session.commit()

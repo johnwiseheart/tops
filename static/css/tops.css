@@ -36,9 +36,6 @@ html, body {
   border: 1px #eee;
 }
 
-*:focus {
-outline: none;
-}
 
 .thumbs {
   height: 120px;
